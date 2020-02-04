@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/04 15:55:34 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/04 22:39:32 by rolaforg    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/04 23:09:04 by rolaforg    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,6 +53,55 @@ void	ft_putnbr(int n)
 		ft_putnbr(n % 10);
 	}
 }
+
+int		ft_verif_base(char *base)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (base[i])
+	{
+		j = i + 1;
+		while (base[i] != base[j] && base[j])
+			j++;
+		if (base[i] == base[j])
+			return (0);
+		else if (!(base[i] >= '!' && base[i] <= '~') ||
+				(base[i] == '+' || base[i] == '-'))
+			return (0);
+		i++;
+	}
+	if (i <= 1)
+		return (0);
+	return (1);
+}
+
+void	ft_putnbr_base(long nb, char *base)
+{
+	int		size;
+	int		i;
+
+	size = 0;
+	i = 0;
+	if (ft_verif_base(base))
+	{
+		while (base[size])
+			size++;
+		if (nb < 0)
+		{
+			ft_putchar('-');
+			ft_putnbr_base(nb * -1, base);
+		}
+		else if (nb < size)
+			ft_putchar(base[nb]);
+		else
+		{
+			ft_putnbr_base(nb / size, base);
+			ft_putnbr_base(nb % size, base);
+		}
+	}
+}
 /////////////////////////////
 /////////////////////////////
 /////////////////////////////
@@ -75,6 +124,18 @@ void	ft_print_nb(va_list list)
 	ft_putnbr(num);
 }
 
+void	ft_printf_hex(va_list list)
+{
+	int	num = va_arg(list, int);
+	ft_putnbr_base(num, "0123456789abcdef");
+}
+
+void	ft_printf_hexa(va_list list)
+{
+	int	num = va_arg(list, int);
+	ft_putnbr_base(num, "0123456789ABCDEF");
+}
+
 int		findIndex(char *flags, char element)
 {
 	int	i;
@@ -93,8 +154,8 @@ int		findIndex(char *flags, char element)
 
 int		ft_printf(const char *str, ...)
 {
-	void	(*functions[4]) (va_list) = {ft_print_str, ft_print_char, ft_print_nb, ft_print_nb};
-	char	flags[5] = {'s', 'c', 'd', 'i', 0};
+	void	(*functions[6]) (va_list) = {ft_print_str, ft_print_char, ft_print_nb, ft_print_nb, ft_printf_hex, ft_printf_hexa};
+	char	flags[7] = {'s', 'c', 'd', 'i', 'x', 'X',0};
 	va_list	list;
 	int		tmp;
 	int		i;
@@ -114,16 +175,30 @@ int		ft_printf(const char *str, ...)
 		i++;
 	}
 
-	return (1);
+	return (i);
+}
+
+void	test(int one, int two)
+{
+	if (one == two)
+		printf(" ✅\n");
+	else
+	{
+		printf(" ❌\n");
+		printf("Expected: %d, got: %d\n", one, two);
+	}
+	printf("------------\n");
 }
 
 int		main(int ac, char const **argv)
 {
 	char str[] = "ZOB";
-	ft_printf("%d\n", 42);
-	ft_printf("%i\n", 420);	
-	ft_printf("%c\n", '!');
-	ft_printf("%s\n", str);
-	ft_printf("Im a str\n");
+	test(printf("'%i'", 42), ft_printf("'%d'", 42));
+	test(printf("'%i'", 420), ft_printf("'%i'", 420));
+	test(printf("'%c'", '!'), ft_printf("'%c'", '!'));
+	test(printf("'%s'", str),	ft_printf("'%s'", str));
+	test(printf("'Im a str'"), ft_printf("'Im a str'"));
+	test(printf("'%x'", 42),	ft_printf("'%x'", 42));
+	test(printf("'%X'", 42), ft_printf("'%X'", 42));
 	return (0);
 }
