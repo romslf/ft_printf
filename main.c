@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/04 15:55:34 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/04 22:31:31 by rolaforg    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/04 22:39:32 by rolaforg    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -102,7 +102,7 @@ int		ft_printf(const char *str, ...)
 	tmp = 0;
 	i = 0;
 	va_start(list, str);
-	while (str[i++])
+	while (str[i])
 	{
 		if (i != 0 && str[i - 1] == '%')
 		{
@@ -111,6 +111,7 @@ int		ft_printf(const char *str, ...)
 				(*functions[tmp]) (list);
 		} else if (str[i] != '%')
 			ft_putchar(str[i]);
+		i++;
 	}
 
 	return (1);
@@ -123,5 +124,6 @@ int		main(int ac, char const **argv)
 	ft_printf("%i\n", 420);	
 	ft_printf("%c\n", '!');
 	ft_printf("%s\n", str);
+	ft_printf("Im a str\n");
 	return (0);
 }
