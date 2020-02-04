@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/04 15:55:34 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/04 21:59:48 by rolaforg    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/04 22:15:27 by rolaforg    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -57,21 +57,21 @@ void	ft_putnbr(int n)
 /////////////////////////////
 /////////////////////////////
 
-void	ft_print_str(va_list *list)
+void	ft_print_str(va_list list)
 {
-	char *str = va_arg(*list, char *);
+	char *str = va_arg(list, char *);
 	ft_putstr(str);
 }
 
-void	ft_print_char(va_list *list)
+void	ft_print_char(va_list list)
 {
-	char c = va_arg(*list, int);
+	char c = va_arg(list, int);
 	ft_putchar(c);
 }
 
-void	ft_print_nb(va_list *list)
+void	ft_print_nb(va_list list)
 {
-	int num = va_arg(*list, int);
+	int num = va_arg(list, int);
 	ft_putnbr(num);
 }
 
@@ -80,15 +80,20 @@ int		findIndex(char *flags, char element)
 	int	i;
 
 	i = 0;
-	while (flags[i++])
+	while (flags[i])
+	{
 		if(flags[i] == element)
 			return (i);
+		i++;
+	}
+	printf("%c\n", flags[i]);
+	printf("%c\n", element);
 	return (-1);
 }
 
 int		ft_printf(const char *str, ...)
 {
-	void	(*functions[3]) (va_list *) = {ft_print_str, ft_print_char, ft_print_nb};
+	void	(*functions[3]) (va_list) = {ft_print_str, ft_print_char, ft_print_nb};
 	char	flags[4] = {'s', 'c', 'd', 0};
 	va_list	list;
 	int		tmp;
@@ -103,7 +108,7 @@ int		ft_printf(const char *str, ...)
 		{
 			tmp = findIndex(flags, str[i]);
 			if (tmp != -1)
-				(*functions[tmp]) (&list);
+				(*functions[tmp]) (list);
 		} else if (str[i] != '%')
 			ft_putchar(str[i]);
 	}
@@ -113,8 +118,9 @@ int		ft_printf(const char *str, ...)
 
 int		main(int ac, char const **argv)
 {
+	char str[] = "ZOB";
 	ft_printf("%d\n", 42);
 	ft_printf("%c\n", '!');
-	ft_printf("%s\n", "Im a string !");
+	ft_printf("%s\n", str);
 	return (0);
 }
