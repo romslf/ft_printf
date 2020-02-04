@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/04 15:55:34 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/04 22:15:27 by rolaforg    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/04 22:31:31 by rolaforg    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -93,8 +93,8 @@ int		findIndex(char *flags, char element)
 
 int		ft_printf(const char *str, ...)
 {
-	void	(*functions[3]) (va_list) = {ft_print_str, ft_print_char, ft_print_nb};
-	char	flags[4] = {'s', 'c', 'd', 0};
+	void	(*functions[4]) (va_list) = {ft_print_str, ft_print_char, ft_print_nb, ft_print_nb};
+	char	flags[5] = {'s', 'c', 'd', 'i', 0};
 	va_list	list;
 	int		tmp;
 	int		i;
@@ -120,6 +120,7 @@ int		main(int ac, char const **argv)
 {
 	char str[] = "ZOB";
 	ft_printf("%d\n", 42);
+	ft_printf("%i\n", 420);	
 	ft_printf("%c\n", '!');
 	ft_printf("%s\n", str);
 	return (0);
