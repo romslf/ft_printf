@@ -6,12 +6,13 @@
 /*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/04 15:55:34 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 17:11:58 by rolaforg    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 13:02:46 by rolaforg    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 /////////////////////////////
 /////////	LIBFT	/////////
 /////////////////////////////
@@ -79,8 +80,8 @@ int		ft_verif_base(char *base)
 
 void	ft_putnbr_base(long nb, char *base)
 {
-	int		size;
-	int		i;
+	long		size;
+	long		i;
 
 	size = 0;
 	i = 0;
@@ -97,6 +98,36 @@ void	ft_putnbr_base(long nb, char *base)
 			ft_putchar(base[nb]);
 		else
 		{
+			ft_putnbr_base(nb / size, base);
+			ft_putnbr_base(nb % size, base);
+		}
+	}
+}
+
+void	ft_putnbr_base_pref(long nb, char *base)
+{
+	long		size;
+	long		i;
+
+	size = 0;
+	i = 0;
+	if (ft_verif_base(base))
+	{
+		while (base[size])
+			size++;
+		if (nb < 0)
+		{
+			ft_putstr("-0x");
+			ft_putnbr_base(nb * -1, base);
+		}
+		else if (nb < size)
+		{
+			ft_putstr("0x");
+			ft_putchar(base[nb]);
+		}
+		else
+		{
+			ft_putstr("0x");
 			ft_putnbr_base(nb / size, base);
 			ft_putnbr_base(nb % size, base);
 		}
@@ -124,6 +155,12 @@ void	ft_print_nb(va_list list)
 	ft_putnbr(num);
 }
 
+void	ft_print_unsigned(va_list list)
+{
+	int num = va_arg(list, unsigned);
+	ft_putnbr(num);
+}
+
 void	ft_printf_hex(va_list list)
 {
 	int	num = va_arg(list, int);
@@ -138,8 +175,8 @@ void	ft_printf_hexa(va_list list)
 
 void	ft_print_address(va_list list)
 {
-	char **str = va_arg(list, char **);
-	ft_putstr(&str);
+	long add = (long)va_arg(list, char **);
+	ft_putnbr_base_pref(add, "0123456789abcdef");
 }
 
 int		findIndex(char *flags, char element)
@@ -160,8 +197,8 @@ int		findIndex(char *flags, char element)
 
 int		ft_printf(const char *str, ...)
 {
-	void	(*functions[7]) (va_list) = {ft_print_str, ft_print_char, ft_print_nb, ft_print_nb, ft_printf_hex, ft_printf_hexa, ft_print_address};
-	char	flags[8] = {'s', 'c', 'd', 'i', 'x', 'X', 'p', 0};
+	void	(*functions[8]) (va_list) = {ft_print_str, ft_print_char, ft_print_nb, ft_print_nb, ft_printf_hex, ft_printf_hexa, ft_print_address, ft_print_unsigned};
+	char	flags[9] = {'s', 'c', 'd', 'i', 'x', 'X', 'p', 'u', 0};
 	va_list	list;
 	int		tmp;
 	int		i;
@@ -185,23 +222,33 @@ int		ft_printf(const char *str, ...)
 	return (i - x);
 }
 
+void	header(void)
+{
+	printf("-------------------------------------------\n");
+	printf("  _____  _____  __________________________\n");
+	printf(" |  __ \\|  __ \\|_   _| \\ | |__   __|  ____|\n | |__) | |__) | | | |  \\| |  | |  | |__   \n |  ___/|  _  /  | | | . ` |  | |  |  __|  \n | |    | | \\ \\ _| |_| |\\  |  | |  | |     \n |_|    |_|  \\_\\_____|_| \\_|  |_|  |_|     \n");
+	printf("				By rolaforg\n");
+	printf("-------------------------------------------\n");
+}
+
 void	test(int one, int two)
 {
-	if (one == two)
+	
+	
+	 if (one == two)
 		printf(" ✅\n");
-	else
-	{
-		printf("\n");
-		//printf("Expected: %d, got: %d\n", one, two);
-	}
-	printf("------------------------------\n");
+	 else
+	 	printf(" \n");
+	printf("--------------------------------\n");
 }
 
 int		main(void)
 {
 	char *str = "test";
 	char **ptr = &str;
-
+	unsigned int one = 42;
+	unsigned int two = 1337;
+	header();
 	test(printf("'%d'", 4), ft_printf("'%d'", 4));
 	test(printf("'%d'", 42), ft_printf("'%d'", 42));
 	test(printf("'%d'", 420), ft_printf("'%d'", 420));
@@ -221,5 +268,7 @@ int		main(void)
 	test(printf("'%X'", 42), ft_printf("'%X'", 42));
 	test(printf("'%X'", 420), ft_printf("'%X'", 420));
 	test(printf("'%p'", ptr), ft_printf("'%p'", ptr));
+	test(printf("'%u'", one), ft_printf("'%u'", one));
+	test(printf("'%u'", two), ft_printf("'%u'", two));
 	return (0);
 }
