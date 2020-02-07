@@ -9,10 +9,10 @@
 // @ts-ignore
 #include <unistd.h>
 
-typedef struct buff
-{
- 	long size = 0;
-} buff;
+// typedef struct buff
+// {
+//  	long size = 0;
+// } buff;
 
 int	ft_printf(const char *, ...);
 int ft_strlen(char *str);
