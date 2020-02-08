@@ -37,7 +37,7 @@ int ft_verif_base(char *base)
 	return (1);
 }
 
-void ft_putnbr_base(long nb, char *base)
+void ft_putnbr_base(unsigned int nb, char *base, t_buff *buffer)
 {
 	long size;
 
@@ -46,22 +46,20 @@ void ft_putnbr_base(long nb, char *base)
 	{
 		while (base[size])
 			size++;
-		if (nb < 0)
+		if (nb < size)
 		{
-			ft_putchar('-');
-			ft_putnbr_base(nb * -1, base);
-		}
-		else if (nb < size)
+			buffer->size = buffer->size + 1;
 			ft_putchar(base[nb]);
+		}
 		else
 		{
-			ft_putnbr_base(nb / size, base);
-			ft_putnbr_base(nb % size, base);
+			ft_putnbr_base(nb / size, base, buffer);
+			ft_putnbr_base(nb % size, base, buffer);
 		}
 	}
 }
 
-void ft_putnbr_base_pref(long nb, char *base)
+void ft_putnbr_base_pref(long nb, char *base, t_buff *buffer)
 {
 	long size;
 
@@ -70,21 +68,15 @@ void ft_putnbr_base_pref(long nb, char *base)
 	{
 		while (base[size])
 			size++;
-		if (nb < 0)
+		if (nb < size)
 		{
-			ft_putstr("-0x");
-			ft_putnbr_base(nb * -1, base);
-		}
-		else if (nb < size)
-		{
-			ft_putstr("0x");
+			buffer->size = buffer->size + 1;
 			ft_putchar(base[nb]);
 		}
 		else
 		{
-			ft_putstr("0x");
-			ft_putnbr_base(nb / size, base);
-			ft_putnbr_base(nb % size, base);
+			ft_putnbr_base_pref(nb / size, base, buffer);
+			ft_putnbr_base_pref(nb % size, base, buffer);
 		}
 	}
 }

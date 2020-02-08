@@ -6,15 +6,15 @@
 /*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 13:58:10 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 14:00:18 by rolaforg    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/08 23:15:46 by rolaforg    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
 
-void ft_print_hexa(va_list list)
+void ft_print_hexa(va_list list, t_buff *buffer)
 {
 	int num = va_arg(list, int);
-	ft_putnbr_base(num, "0123456789ABCDEF");
+	ft_putnbr_base(num, "0123456789ABCDEF", buffer);
 }

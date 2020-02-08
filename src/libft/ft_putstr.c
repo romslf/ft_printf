@@ -14,7 +14,11 @@
 #include "../../ft_printf.h"
 
 
-void ft_putstr(char *s)
+long	ft_putstr(char *s)
 {
-	write(1, s, ft_strlen(s));
+	long	size;
+
+	size = ft_strlen(s);
+	write(1, s, size);
+	return (size);
 }

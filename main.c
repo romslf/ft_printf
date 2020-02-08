@@ -6,14 +6,19 @@
 /*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/04 15:55:34 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 13:59:12 by rolaforg    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/08 23:52:47 by rolaforg    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int findIndex(char *flags, char element)
+void	init_buff(t_buff *buffer)
+{
+	buffer->size = 0;
+}
+
+int		findIndex(char *flags, char element)
 {
 	int i;
 
@@ -29,16 +34,21 @@ int findIndex(char *flags, char element)
 	return (-1);
 }
 
-int ft_printf(const char *str, ...)
+int		ft_printf(const char *str, ...)
 {
-	void (*functions[8])(va_list) = {ft_print_str, ft_print_char, ft_print_nb, ft_print_nb, ft_print_hex, ft_print_hexa, ft_print_address, ft_print_unsigned};
+	void (*functions[8])(va_list, t_buff *) = {ft_print_str, ft_print_char, ft_print_nb, ft_print_nb, ft_print_hex, ft_print_hexa, ft_print_address, ft_print_unsigned};
 	char flags[9] = {'s', 'c', 'd', 'i', 'x', 'X', 'p', 'u', 0};
+	t_buff buffer;
 	va_list list;
 	int tmp;
 	int i;
+	int x;
+
 
 	tmp = 0;
 	i = 0;
+	x= 0;
+	init_buff(&buffer);
 	va_start(list, str);
 	while (str[i])
 	{
@@ -46,25 +56,28 @@ int ft_printf(const char *str, ...)
 		{
 			tmp = findIndex(flags, str[i]);
 			if (tmp != -1)
-				(*functions[tmp])(list);
+				(*functions[tmp])(list, &buffer);
 		}
 		else if (str[i] != '%')
+		{
 			ft_putchar(str[i]);
+			x++;
+		}
 		i++;
 	}
-	return (i);
+	buffer.size = buffer.size + x;
+	return (buffer.size);
 }
 
 void header(void)
 {
 	printf("\033[1;36m");
-	printf("-------------------------------------------\n");
+	printf("----------------------------------------------------------------------\n");
 	printf("  _____  _____  _____ _   _ _______ ______\n");
 	printf(" |  __ \\|  __ \\|_   _| \\ | |__   __|  ____|\n | |__) | |__) | | | |  \\| |  | |  | |__   \n |  ___/|  _  /  | | | . ` |  | |  |  __|  \n | |    | | \\ \\ _| |_| |\\  |  | |  | |     \n |_|    |_|  \\_\\_____|_| \\_|  |_|  |_|     \n");
-	printf("\033[4;33m");
-	printf("				By rolaforg\n");
+	printf("\033[4;33m				By rolaforg\033[0m\n");
 	printf("\033[1;36m");
-	printf("-------------------------------------------\n");
+	printf("----------------------------------------------------------------------\n");
 	printf("\033[0m");
 	printf("\n");
 	printf("\033[7;49m");
@@ -101,17 +114,16 @@ void test(int one, int two)
 void testing(char *str)
 {
 	//char *sep = "-----------------------------------------------------------";
-	printf("\033[4;95m");
 	//printf("%s\n", sep);
-	printf("Testing %s :\n", str);
+	printf("\033[4;95mTesting %s :\033[0m\n", str);
 	//printf("%s\n", sep);
-	printf("\033[0m");
 	printf("\n");
 }
 
 int main(void)
 {
 	header();
+	char *n = NULL;
 	char *str = "test";
 	int nb = 1337;
 	char **ptr1 = &str;
@@ -136,6 +148,7 @@ int main(void)
 
 	testing("%s");
 	test(printf("[%s]", "I"), ft_printf("'%s'", "I"));
+	//test(printf("[%s]", n), ft_printf("'%s'", n));
 	test(printf("[%s]", "Im"), ft_printf("'%s'", "Im"));
 	test(printf("[%s]", "Im a string"), ft_printf("'%s'", "Im a string"));
 	test(printf("[%s %s %s]", "We", "are", "strings"), ft_printf("'%s %s %s'", "We", "are", "strings"));
@@ -149,14 +162,15 @@ int main(void)
 	test(printf("[%x]", 42), ft_printf("'%x'", 42));
 	test(printf("[%x]", 420), ft_printf("'%x'", 420));
 	test(printf("[%x]", 4200), ft_printf("'%x'", 4200));
-	test(printf("[%x]", 1337000000), ft_printf("'%x'", 1337000000));
+	test(printf("[%x]", -1), ft_printf("'%x'", -1));
 
 	testing("%X");
 	test(printf("[%X]", 4), ft_printf("'%X'", 4));
 	test(printf("[%X]", 42), ft_printf("'%X'", 42));
 	test(printf("[%X]", 420), ft_printf("'%X'", 420));
 	test(printf("[%X]", 4200), ft_printf("'%X'", 4200));
-	test(printf("[%X]", 1337000000), ft_printf("'%X'", 1337000000));
+	test(printf("[%X]", -5), ft_printf("'%X'", -5));
+	// -1337000000
 
 	testing("%p");
 	test(printf("[%p]", ptr1), ft_printf("'%p'", ptr1));
