@@ -6,12 +6,12 @@
 /*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 13:56:38 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/08 23:14:31 by rolaforg    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/22 15:23:58 by rolaforg    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../ft_printf.h"
+#include "../libftprintf.h"
 
 void ft_print_hex(va_list list, t_buff *buffer)
 {

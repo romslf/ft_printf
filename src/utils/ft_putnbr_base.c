@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../ft_printf.h"
+#include "../libftprintf.h"
 
 
 int ft_verif_base(char *base)

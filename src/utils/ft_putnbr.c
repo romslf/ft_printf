@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../ft_printf.h"
+#include "../libftprintf.h"
 
 
 void ft_putnbr(int n, t_buff *buffer)
