@@ -1,20 +1,52 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   ft_print_str.c                                   .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/02/07 13:51:57 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/22 15:23:58 by rolaforg    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/07 13:51:57 by rolaforg          #+#    #+#             */
+/*   Updated: 2020/04/09 16:37:25 by rolaforg         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-void ft_print_str(va_list list, t_buff *buffer)
+void	handle_case(char *str, t_buff *buffer)
 {
-	char *str = va_arg(list, char *);
-	buffer->size = buffer->size + ft_putstr(str);
+	int	len;
+
+	if (buffer->preci && buffer->precision < ft_strlen(str))
+		len = buffer->precision;
+	else
+		len = ft_strlen(str);
+	
+	if (buffer->spaces > len)
+		handle_spaces(len, buffer, 0);
+	if (buffer->preci && buffer->precision == len)
+	{
+		write(1, str, buffer->precision);
+		buffer->size += buffer->precision;
+	}
+	else
+	{
+		buffer->size += ft_putstr(str);
+	}
+	if (buffer->spaces > len)
+		handle_spaces(len, buffer, 1);
+}
+
+void	ft_print_str(va_list list, t_buff *buffer)
+{
+	char	*str;
+	int		len;
+
+	str = va_arg(list, char *);
+	len = ft_strlen(str);
+	
+	if (!str)
+		handle_case("(null)", buffer);
+	else 
+		handle_case(str, buffer);
+	reset_buffer(buffer);
 }

@@ -1,21 +1,36 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   ft_print_char.c                                  .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/02/07 13:53:24 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/22 15:23:58 by rolaforg    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/07 13:53:24 by rolaforg          #+#    #+#             */
+/*   Updated: 2020/04/07 19:03:34 by rolaforg         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
 void ft_print_char(va_list list, t_buff *buffer)
 {
-	char c = va_arg(list, int);
-	buffer->size = buffer->size + 1;
+	char c;
+
+	c = va_arg(list, int);
+	if (!buffer->preci)
+		handle_spaces(1, buffer, 0);
 	ft_putchar(c);
+	buffer->size = buffer->size + 1;
+	if (!buffer->preci)
+		handle_spaces(1, buffer, 1);
+}
+
+void ft_print_char_b(char c, t_buff *buffer)
+{
+	if (!buffer->preci)
+		handle_spaces(1, buffer, 0);
+	ft_putchar(c);
+	buffer->size = buffer->size + 1;
+	if (!buffer->preci)
+		handle_spaces(1, buffer, 1);
 }

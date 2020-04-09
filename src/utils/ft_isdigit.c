@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/07 13:55:47 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/06 13:43:35 by rolaforg         ###   ########lyon.fr   */
+/*   Created: 2020/04/02 12:55:11 by rolaforg          #+#    #+#             */
+/*   Updated: 2020/04/02 12:56:27 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
-
-void ft_print_unsigned(va_list list, t_buff *buffer) // FIXME Negative numbers
+int	ft_isdigit(char c)
 {
-	unsigned long num = va_arg(list, unsigned);
-	handle_spaces(num_len(num), buffer, 0);
-	ft_putnbr(num, buffer);
-	handle_spaces(num_len(num), buffer, 1);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

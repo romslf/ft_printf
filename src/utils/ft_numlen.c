@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_numlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/07 13:55:47 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/06 13:43:35 by rolaforg         ###   ########lyon.fr   */
+/*   Created: 2020/04/04 13:43:33 by rolaforg          #+#    #+#             */
+/*   Updated: 2020/04/04 19:04:53 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
-
-void ft_print_unsigned(va_list list, t_buff *buffer) // FIXME Negative numbers
+int num_len(long num)
 {
-	unsigned long num = va_arg(list, unsigned);
-	handle_spaces(num_len(num), buffer, 0);
-	ft_putnbr(num, buffer);
-	handle_spaces(num_len(num), buffer, 1);
+	int res;
+
+	res = 0;
+	while (num > 0)
+	{
+		res += 1;
+		num = num / 10;
+	}
+	if (res)
+		return (res);
+	return (1);
 }
