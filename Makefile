@@ -5,6 +5,8 @@ NAME = libftprintf.a
 
 SRCS = src/main.c \
        src/handle_spaces.c \
+	   src/options/minus.c \
+	   src/options/point.c \
 	   src/printers/ft_print_address.c \
 	   src/printers/ft_print_char.c \
 	   src/printers/ft_print_hex.c \
