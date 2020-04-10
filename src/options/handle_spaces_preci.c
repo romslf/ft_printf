@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_spaces.c                                    :+:      :+:    :+:   */
+/*   handle_spaces_preci.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/04 13:20:21 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/10 20:09:35 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 20:23:14 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ void	reset_buffer(t_buff *buffer)
 	buffer->zero = 0;
 }
 
-void	handle_spaces(int len, t_buff *buffer, int left, int preciMode)
+void	handle_spaces(int len, t_buff *buffer, int left)
 {
-	int lenght = len;
+	int lenght;
 
+	lenght = len;
 	if (buffer->precision)
 		buffer->zero = 0;
 	if (buffer->precision > len && buffer->spaces)
@@ -44,12 +45,16 @@ void	handle_spaces(int len, t_buff *buffer, int left, int preciMode)
 			buffer->size += 1;
 		}
 	}
+}
+
+void	handle_preci(int len, t_buff *buffer, int preci_mode)
+{
 	if (buffer->preci && buffer->precision > len)
 	{
 		buffer->precision -= len;
 		while (buffer->precision > 0)
 		{
-			if (preciMode == 0)
+			if (preci_mode == 0)
 				ft_putchar('0');
 			else
 				ft_putchar(' ');
@@ -57,4 +62,10 @@ void	handle_spaces(int len, t_buff *buffer, int left, int preciMode)
 			buffer->size += 1;
 		}
 	}
+}
+
+void	handle_spaces_preci(int len, t_buff *buffer, int left, int preci_mode)
+{
+	handle_spaces(len, buffer, left);
+	handle_preci(len, buffer, preci_mode);
 }
