@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:55:02 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/09 17:24:15 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 00:15:17 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,24 @@ void ft_print_nb(va_list list, t_buff *buffer)
 {
 	int num = va_arg(list, int);
 	int spaces = 0;
-
-	if (buffer->preci && buffer->precision < buffer->spaces)
+	int len = num_len(num);
+	if (buffer->preci)
 	{
-		spaces = buffer->spaces - buffer->precision;
-		buffer->spaces -= buffer->precision;
+		spaces = buffer->precision - len;
 		if (!buffer->left)
 		{
 			while (spaces-- > 0)
-				buffer->size += ft_putstr(" ");
+				buffer->size += ft_putstr("0");
 		}
 	}
-	handle_spaces(num_len(num), buffer, 0);
+	else
+		handle_spaces(len, buffer, 0);
 	ft_putnbr(num, buffer);
 	if (spaces)
 	{
 		while (spaces-- > 0)
-			buffer->size += ft_putstr(" ");
+			buffer->size += ft_putstr("0");
 	}
-	handle_spaces(num_len(num), buffer, 1);
+	else
+		handle_spaces(len, buffer, 1);
 }

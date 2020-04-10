@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:55:34 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/09 18:29:56 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/09 22:30:52 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,11 @@ int		handle_options(va_list list, const char *str, t_buff *buffer)
 		if (str[i] == '*')
 		{
 			buffer->spaces = va_arg(list, int);
-			if (buffer->spaces < 0)
-				buffer->spaces *= -1;
 			i++;
 			return (i);
 		}
 		while (str[i] >= '0' && str[i] <= '9')
-		{
-			buffer->spaces = (buffer->spaces * 10) + (str[i] - '0');
-			i++;
-		}
+			buffer->spaces = (buffer->spaces * 10) + (str[i++] - '0');
 	}
 	else if (str[i] == '.')
 	{
@@ -139,6 +134,12 @@ int		ft_printf(const char *str, ...) // FIXME Norme (Lines nb)
 		{
 			if (i != 0 && str[i - 1] == '%' && str[i - 2] != '%')
 			{	
+				while (tmp != 0)
+				{
+					tmp = handle_options(list, str + i, &buffer);
+					i += tmp;
+				}
+				tmp = -1;
 				while (tmp != 0)
 				{
 					tmp = handle_options(list, str + i, &buffer);

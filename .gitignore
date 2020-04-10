@@ -52,4 +52,5 @@ Mkfile.old
 dkms.conf
 
 # Visual Studio Code
-.vscodepft_2019/
+.vscode
+pft_2019/

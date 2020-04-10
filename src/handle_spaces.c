@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/04 13:20:21 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/07 19:47:34 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 00:21:10 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ void	reset_buffer(t_buff *buffer)
 
 void	handle_spaces(int len, t_buff *buffer, int left)
 {
-	if (buffer->spaces && (buffer->spaces > len) && buffer->left == left)
+	int lenght = len;
+
+	if (buffer->precision > len && buffer->spaces)
+		lenght = buffer->precision;
+	if (buffer->spaces && (buffer->spaces > lenght) && buffer->left == left)
 	{
-		buffer->spaces -= len;
+		buffer->spaces -= lenght;
 		while (buffer->spaces > 0)
 		{
 			if (buffer->zero)

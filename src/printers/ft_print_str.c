@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:51:57 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/09 16:37:25 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 00:00:21 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,8 @@ void	handle_case(char *str, t_buff *buffer)
 	
 	if (buffer->spaces > len)
 		handle_spaces(len, buffer, 0);
-	if (buffer->preci && buffer->precision == len)
-	{
-		write(1, str, buffer->precision);
-		buffer->size += buffer->precision;
-	}
-	else
-	{
-		buffer->size += ft_putstr(str);
-	}
+	write(1, str, len);
+	buffer->size += len;
 	if (buffer->spaces > len)
 		handle_spaces(len, buffer, 1);
 }

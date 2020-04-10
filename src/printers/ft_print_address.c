@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:58:46 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/09 16:43:58 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 00:16:12 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void ft_print_address(va_list list, t_buff *buffer)
 		handle_spaces(len, buffer, 0);
 		ft_putstr("0x");
 	}
-	if (add)		
-		buffer->size += ft_putstr(str) + 2;
-	else
-		buffer->size += 2;
+	// if (add)		
+	buffer->size += ft_putstr(str) + 2;
+	// else
+	// 	buffer->size += 2;
 	handle_spaces(len, buffer, 1);
 }
