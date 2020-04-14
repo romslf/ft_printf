@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:55:34 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/10 20:04:13 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/11 19:13:33 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int		handle_options(va_list list, const char *str, t_buff *buffer)
 	{
 		buffer->spaces = va_arg(list, int);
 		if (buffer->spaces < 0)
+		{
 			buffer->spaces *= -1;
+			buffer->left = 1;
+		}
 		i++;
 	}
 	else if (str[i] == '0')

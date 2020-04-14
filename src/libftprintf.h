@@ -22,6 +22,8 @@ int		handle_point(va_list list, const char *str, t_buff *buffer);
 void	reset_buffer(t_buff *buffer);
 int		ft_printf(const char *, ...);
 void	handle_spaces_preci(int len, t_buff *buffer, int left, int preciMode);
+void	handle_spaces(int len, t_buff *buffer, int left);
+void	handle_preci(int len, t_buff *buffer, int preci_mode);
 int		ft_strlen(char *str);
 int		num_len(int num);
 char	*ft_strrev(char *str);

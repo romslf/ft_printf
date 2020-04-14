@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 19:26:26 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/10 19:29:31 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/13 17:47:29 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int handle_minus(va_list list, const char *str, t_buff *buffer)
 	if (str[i] == '*')
 	{
 	    buffer->spaces = va_arg(list, int);
+		if (buffer->spaces < 0)
+			buffer->spaces *= -1;
 		i++;
 		return (i);
 	}

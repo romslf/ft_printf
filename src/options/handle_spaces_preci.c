@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/04 13:20:21 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/10 20:23:14 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/14 17:53:57 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,9 @@ void	reset_buffer(t_buff *buffer)
 
 void	handle_spaces(int len, t_buff *buffer, int left)
 {
-	int lenght;
-
-	lenght = len;
-	if (buffer->precision)
-		buffer->zero = 0;
-	if (buffer->precision > len && buffer->spaces)
+	if (buffer->spaces > len && buffer->left == left)
 	{
-		lenght = buffer->precision;
-	}
-	if (buffer->spaces > lenght && buffer->left == left)
-	{
-		buffer->spaces -= lenght;
+		buffer->spaces -= len;
 		while (buffer->spaces > 0)
 		{
 			if (buffer->zero)
@@ -66,6 +57,14 @@ void	handle_preci(int len, t_buff *buffer, int preci_mode)
 
 void	handle_spaces_preci(int len, t_buff *buffer, int left, int preci_mode)
 {
-	handle_spaces(len, buffer, left);
+	int lenght = len;
+
+	if (buffer->precision)
+		buffer->zero = 0;
+	if (buffer->precision > len && buffer->spaces)
+	{
+		lenght = buffer->precision;
+	}
+	handle_spaces(lenght, buffer, left);
 	handle_preci(len, buffer, preci_mode);
 }

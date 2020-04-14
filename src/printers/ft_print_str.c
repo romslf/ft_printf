@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:51:57 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/10 20:18:15 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/14 17:47:08 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,18 @@ void	ft_print_str(va_list list, t_buff *buffer)
 
 	str = va_arg(list, char *);
 	len = ft_strlen(str);
-	
+	if (!str && buffer->precision > 6)
+	{
+		buffer->precision = 0;
+		buffer->preci = 0;
+	}
+	else if (str && buffer->precision > len)
+	{
+		buffer->precision = 0;
+		buffer->preci = 0;
+	}
 	if (!str)
 		handle_case("(null)", buffer);
-	else 
-		handle_case(str, buffer);
-	reset_buffer(buffer);
+	else
+	 	handle_case(str, buffer);
 }

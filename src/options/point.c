@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 19:37:43 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/10 19:48:12 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/14 17:54:23 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		handle_point(va_list list, const char *str, t_buff *buffer)
 		if (str[i] == '*')
 		{
 			buffer->precision = va_arg(list, int);
+			if (buffer->precision < 0)
+				buffer->preci = 0;
 			i++;
 			return (i);
 		}
