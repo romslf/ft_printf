@@ -14,6 +14,7 @@ typedef struct	s_buff
 	int left;
 	int preci;
 	int precision;
+	int tmp;
 }				t_buff;
 
 void	ft_print_char_b(char c, t_buff *buffer);

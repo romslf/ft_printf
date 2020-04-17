@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:58:46 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/10 20:18:15 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 01:11:31 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,22 @@ void ft_print_address(va_list list, t_buff *buffer)
 
 	add = (unsigned long long int)va_arg(list, char **);
 	str = ft_ulltoa_base(add, "0123456789abcdef");
-	len = ft_strlen(str) + 2;
-	if (buffer->preci)
-	{
-		buffer->zero = 1;
-		ft_putstr("0x");
+	if (add)
+		len = ft_strlen(str) + 2;
+	else if (!add && !buffer->preci)
+		len = 3;
+	else
+		len = 2;
+	
+	if ((buffer->spaces > len) && !buffer->left)
+		handle_spaces_preci(len, buffer, 0, 0);
+	buffer->size += ft_putstr("0x");
+	if (buffer->precision)
 		handle_spaces_preci(len - 2, buffer, 0, 0);
-	}	
-	else if (buffer->zero || buffer->left) {
-		ft_putstr("0x");
-		handle_spaces_preci(len, buffer, 0, 0);
-	}
-	else if (!buffer->zero && !buffer->left) {
-		handle_spaces_preci(len, buffer, 0, 0);
-		ft_putstr("0x");
-	}
-	// if (add)		
-	buffer->size += ft_putstr(str) + 2;
-	// else
-	// 	buffer->size += 2;
-	handle_spaces_preci(len, buffer, 1, 0);
+	if (add || (!add && !buffer->preci))
+		buffer->size += ft_putstr(str);
+	if (add)
+		handle_spaces_preci(len, buffer, 1, 0);
+	else
+		handle_spaces_preci(0, buffer, 1, 0);
 }

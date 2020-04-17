@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:55:34 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/11 19:13:33 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 11:13:18 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init(t_buff *buffer)
 	buffer->left = 0;
 	buffer->preci = 0;
 	buffer->precision = 0;
+	buffer->tmp = 0;
 }
 
 int		find_index(char element)
@@ -115,6 +116,8 @@ int		ft_printf(const char *str, ...)
 	init(&buffer);
 	if (!str)
 		buffer.size += ft_putstr("(null)");
+	else if (str[0] == '\0')
+		return 0;
 	else
 	{
 		va_start(list, str);
