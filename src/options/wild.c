@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.c                                            :+:      :+:    :+:   */
+/*   wild.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/10 19:37:43 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/17 16:35:32 by rolaforg         ###   ########lyon.fr   */
+/*   Created: 2020/04/17 16:44:15 by rolaforg          #+#    #+#             */
+/*   Updated: 2020/04/17 19:15:51 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-int		handle_point(va_list list, const char *str, t_buff *buffer)
+void	handle_wild(va_list list, t_buff *buffer)
 {
-	int i;
-
-	i = 1;
-	buffer->preci = 1;
-	if (str[i] == '*')
+	buffer->spaces = va_arg(list, int);
+	if (buffer->spaces < 0)
 	{
-		buffer->precision = va_arg(list, int);
-		if (buffer->precision < 0)
-			buffer->preci = 0;
-		i++;
-		return (i);
+		buffer->spaces *= -1;
+		buffer->left = 1;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-		buffer->precision = (buffer->precision * 10) + (str[i++] - '0');
-	buffer->tmp = buffer->precision;
-	return (i);
 }

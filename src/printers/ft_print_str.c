@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:51:57 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/16 23:45:40 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 16:30:21 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	handle_case(char *str, t_buff *buffer)
 		len = buffer->precision;
 	else
 		len = ft_strlen(str);
-	
 	if (buffer->spaces > len)
 		handle_spaces_preci(len, buffer, 0, 1);
 	write(1, str, len);
@@ -51,5 +50,5 @@ void	ft_print_str(va_list list, t_buff *buffer)
 	if (!str)
 		handle_case("(null)", buffer);
 	else
-	 	handle_case(str, buffer);
+		handle_case(str, buffer);
 }

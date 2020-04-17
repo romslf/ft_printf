@@ -6,17 +6,20 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:58:10 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/16 17:57:49 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 16:21:53 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-void ft_print_hexa(va_list list, t_buff *buffer)
+void	ft_print_hexa(va_list list, t_buff *buffer)
 {
-	int num = va_arg(list, int);
-	int len = ft_ullintlen(num, "0123456789ABCDEF");
-		if (!num && buffer->preci && !buffer->precision && !buffer->spaces)
+	int num;
+	int len;
+
+	num = va_arg(list, int);
+	len = ft_ullintlen(num, "0123456789ABCDEF");
+	if (!num && buffer->preci && !buffer->precision && !buffer->spaces)
 		return ;
 	else if (!num && buffer->preci && !buffer->precision && buffer->spaces)
 	{

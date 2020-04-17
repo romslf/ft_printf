@@ -6,15 +6,17 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:55:47 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/16 17:53:01 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 16:30:55 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-void ft_print_unsigned(va_list list, t_buff *buffer)
+void	ft_print_unsigned(va_list list, t_buff *buffer)
 {
-	unsigned long num = va_arg(list, unsigned);
+	unsigned long num;
+
+	num = va_arg(list, unsigned);
 	if (!num && buffer->preci && !buffer->precision && !buffer->spaces)
 		return ;
 	else if (!num && buffer->preci && !buffer->precision && buffer->spaces)

@@ -6,16 +6,19 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:56:38 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/16 17:55:38 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 16:20:50 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-void ft_print_hex(va_list list, t_buff *buffer)
+void	ft_print_hex(va_list list, t_buff *buffer)
 {
-	int num = va_arg(list, int);
-	int len = ft_ullintlen(num, "0123456789abcdef");
+	int num;
+	int len;
+
+	num = va_arg(list, int);
+	len = ft_ullintlen(num, "0123456789abcdef");
 	if (!num && buffer->preci && !buffer->precision && !buffer->spaces)
 		return ;
 	else if (!num && buffer->preci && !buffer->precision && buffer->spaces)

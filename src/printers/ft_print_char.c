@@ -6,13 +6,13 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:53:24 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/10 20:18:15 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 16:18:45 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-void ft_print_char(va_list list, t_buff *buffer)
+void	ft_print_char(va_list list, t_buff *buffer)
 {
 	char c;
 
@@ -25,7 +25,7 @@ void ft_print_char(va_list list, t_buff *buffer)
 		handle_spaces_preci(1, buffer, 1, 1);
 }
 
-void ft_print_char_b(char c, t_buff *buffer)
+void	ft_print_char_b(char c, t_buff *buffer)
 {
 	if (!buffer->preci)
 		handle_spaces_preci(1, buffer, 0, 1);

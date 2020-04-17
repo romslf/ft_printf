@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.c                                            :+:      :+:    :+:   */
+/*   guard.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/10 19:37:43 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/17 16:35:32 by rolaforg         ###   ########lyon.fr   */
+/*   Created: 2020/04/17 16:54:33 by rolaforg          #+#    #+#             */
+/*   Updated: 2020/04/17 16:54:50 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-int		handle_point(va_list list, const char *str, t_buff *buffer)
+int		guard(const char *str)
 {
-	int i;
+	int	i;
+	int	len;
 
-	i = 1;
-	buffer->preci = 1;
-	if (str[i] == '*')
-	{
-		buffer->precision = va_arg(list, int);
-		if (buffer->precision < 0)
-			buffer->preci = 0;
+	i = 0;
+	len = ft_strlen((char *)str);
+	if (str[i] == '%')
 		i++;
-		return (i);
+	while (str[i])
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			i++;
+		else if (str[i] == '-' || str[i] == '.' || str[i] == '*')
+			i++;
+		else
+			break ;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-		buffer->precision = (buffer->precision * 10) + (str[i++] - '0');
-	buffer->tmp = buffer->precision;
-	return (i);
+	if (i == len)
+		return (0);
+	return (1);
 }

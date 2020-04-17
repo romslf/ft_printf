@@ -5,6 +5,7 @@ NAME = libftprintf.a
 
 SRCS = src/main.c \
 	   src/options/minus.c \
+	   src/options/wild.c \
 	   src/options/point.c \
        src/options/handle_spaces_preci.c \
 	   src/printers/ft_print_address.c \
@@ -15,6 +16,7 @@ SRCS = src/main.c \
 	   src/printers/ft_print_str.c \
 	   src/printers/ft_print_unsigned.c \
 	   src/utils/ft_ullintlen.c \
+	   src/utils/guard.c \
        src/utils/ft_numlen.c \
        src/utils/len_nbr_base.c \
        src/utils/ft_putchar.c \

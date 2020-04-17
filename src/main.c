@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:55:34 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/17 15:36:15 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 17:00:24 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,7 @@ int		handle_options(va_list list, const char *str, t_buff *buffer)
 		i += handle_point(list, str, buffer);
 	else if (str[i] == '*')
 	{
-		buffer->spaces = va_arg(list, int);
-		if (buffer->spaces < 0)
-		{
-			buffer->spaces *= -1;
-			buffer->left = 1;
-		}
+		handle_wild(list, buffer);
 		i++;
 	}
 	else if (str[i] == '0')
@@ -110,29 +105,6 @@ int		ft_print(va_list list, const char *str, t_buff *buffer)
 		(*functions[tmp])(list, buffer);
 	reset_buffer(buffer);
 	return (i);
-}
-
-int		guard(const char *str)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = ft_strlen((char *)str);
-	if (str[i] == '%')
-		i++;
-	while (str[i])
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			i++;
-		else if (str[i] == '-' || str[i] == '.' || str[i] == '*')
-			i++;
-		else
-			break;
-	}
-	if (i == len)
-		return (0);
-	return (1);
 }
 
 int		ft_printf(const char *str, ...)

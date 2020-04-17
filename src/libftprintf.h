@@ -18,8 +18,10 @@ typedef struct	s_buff
 }				t_buff;
 
 void	ft_print_char_b(char c, t_buff *buffer);
+int		guard(const char *str);
 int		handle_minus(va_list list, const char *str, t_buff *buffer);
 int		handle_point(va_list list, const char *str, t_buff *buffer);
+void    handle_wild(va_list list, t_buff *buffer);
 void	reset_buffer(t_buff *buffer);
 int		ft_printf(const char *, ...);
 void	handle_spaces_preci(int len, t_buff *buffer, int left, int preciMode);
