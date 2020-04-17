@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:55:34 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/17 11:13:18 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 15:36:15 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,14 @@ int		ft_print(va_list list, const char *str, t_buff *buffer)
 	functions[5] = ft_print_hexa;
 	functions[6] = ft_print_address;
 	functions[7] = ft_print_unsigned;
-	while ((tmp = handle_options(list, str + i, buffer)))
-		i += tmp;
+	while (str[i] && (tmp = handle_options(list, str + i, buffer)))
+	{
+		while (str[i] && tmp > 0)
+		{
+			i++;
+			tmp--;
+		}
+	}
 	if (str[i] == '%')
 		ft_print_char_b(str[i], buffer);
 	tmp = find_index(str[i]);
@@ -104,6 +110,29 @@ int		ft_print(va_list list, const char *str, t_buff *buffer)
 		(*functions[tmp])(list, buffer);
 	reset_buffer(buffer);
 	return (i);
+}
+
+int		guard(const char *str)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen((char *)str);
+	if (str[i] == '%')
+		i++;
+	while (str[i])
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			i++;
+		else if (str[i] == '-' || str[i] == '.' || str[i] == '*')
+			i++;
+		else
+			break;
+	}
+	if (i == len)
+		return (0);
+	return (1);
 }
 
 int		ft_printf(const char *str, ...)
@@ -116,9 +145,7 @@ int		ft_printf(const char *str, ...)
 	init(&buffer);
 	if (!str)
 		buffer.size += ft_putstr("(null)");
-	else if (str[0] == '\0')
-		return 0;
-	else
+	else if (guard(str))
 	{
 		va_start(list, str);
 		while (str[i])
