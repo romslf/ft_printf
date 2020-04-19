@@ -1,20 +1,18 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   ft_putnbr.c                                      .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: rolaforg <rolaforg@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/02/06 17:32:18 by rolaforg     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 17:32:18 by rolaforg    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/19 12:01:54 by rolaforg          #+#    #+#             */
+/*   Updated: 2020/04/19 12:02:06 by rolaforg         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-
-void ft_putnbr(long long n, t_buff *buffer)
+void	ft_putnbr(long long n, t_buff *buffer)
 {
 	if (n < 0)
 	{

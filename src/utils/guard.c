@@ -6,13 +6,13 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 16:54:33 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/17 16:54:50 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 11:37:24 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-int		guard(const char *str)
+int	guard(const char *str)
 {
 	int	i;
 	int	len;

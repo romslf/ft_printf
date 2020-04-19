@@ -18,7 +18,6 @@ SRCS = src/main.c \
 	   src/utils/ft_ullintlen.c \
 	   src/utils/guard.c \
        src/utils/ft_numlen.c \
-       src/utils/len_nbr_base.c \
        src/utils/ft_putchar.c \
 	   src/utils/ft_putnbr_base.c \
 	   src/utils/ft_putnbr.c \

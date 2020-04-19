@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 17:08:40 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/05 18:02:48 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 12:05:10 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strrev(char *str)
 	return (str);
 }
 
-int	ft_ullintlen(unsigned long long nbr, char *base)
+int		ft_ullintlen(unsigned long long nbr, char *base)
 {
 	int lenbase;
 	int x;
@@ -39,7 +39,6 @@ int	ft_ullintlen(unsigned long long nbr, char *base)
 	x = 0;
 	if (nbr == 0)
 		return (1);
-
 	lenbase = ft_strlen(base);
 	while (nbr > 0)
 	{
@@ -49,7 +48,7 @@ int	ft_ullintlen(unsigned long long nbr, char *base)
 	return (x);
 }
 
-char		*ft_ulltoa_base(unsigned long long int nbr, char *base)
+char	*ft_ulltoa_base(unsigned long long int nbr, char *base)
 {
 	int		x;
 	int		m;

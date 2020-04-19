@@ -6,11 +6,11 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/04 13:43:33 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/04 19:04:53 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/18 18:18:54 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-int num_len(long num)
+int	num_len(long num)
 {
 	int res;
 
