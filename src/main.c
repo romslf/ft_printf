@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:55:34 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/17 17:00:24 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 15:41:40 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,11 @@ int		ft_print(va_list list, const char *str, t_buff *buffer)
 	tmp = find_index(str[i]);
 	if (tmp != -1)
 		(*functions[tmp])(list, buffer);
+	else if (str[i + 1] != '\0')
+	{
+		ft_putchar(str[++i]);
+		buffer->size += 1;
+	}
 	reset_buffer(buffer);
 	return (i);
 }
@@ -126,8 +131,8 @@ int		ft_printf(const char *str, ...)
 				i += ft_print(list, str + i, &buffer);
 			else if (str[i] != '%')
 			{
-				buffer.size += 1;
 				ft_putchar(str[i]);
+				buffer.size += 1;
 			}
 			i++;
 		}

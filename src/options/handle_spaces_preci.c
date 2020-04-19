@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_spaces_preci.c                              :+:      :+:    :+:   */
+/*   handle_s_and_p.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -39,14 +39,14 @@ void	handle_spaces(int len, t_buff *buffer, int left)
 	}
 }
 
-void	handle_preci(int len, t_buff *buffer, int preci_mode)
+void	handle_preci(int len, t_buff *buffer, int mode)
 {
 	if (buffer->preci && buffer->precision > len)
 	{
 		buffer->precision -= len;
 		while (buffer->precision > 0)
 		{
-			if (preci_mode == 0)
+			if (mode == 0)
 				ft_putchar('0');
 			else
 				ft_putchar(' ');
@@ -56,15 +56,18 @@ void	handle_preci(int len, t_buff *buffer, int preci_mode)
 	}
 }
 
-void	handle_spaces_preci(int len, t_buff *buffer, int left, int preci_mode)
+void	handle_s_and_p(int len, t_buff *buffer, int left, int mode)
 {
 	int lenght;
 
-	lenght = len;
 	if (buffer->precision)
 		buffer->zero = 0;
-	if (buffer->tmp > len && buffer->spaces)
+	if (buffer->precision > len && buffer->spaces > len)
+		lenght = buffer->precision;
+	else if (buffer->left && buffer->tmp > len && buffer->spaces > len)
 		lenght = buffer->tmp;
+	else
+		lenght = len;
 	handle_spaces(lenght, buffer, left);
-	handle_preci(len, buffer, preci_mode);
+	handle_preci(len, buffer, mode);
 }

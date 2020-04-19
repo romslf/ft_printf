@@ -1,4 +1,3 @@
-# TODO Add libft makefile
 C = gcc
 
 NAME = libftprintf.a

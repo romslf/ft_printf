@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:58:46 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/17 16:13:29 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 13:53:06 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	ft_print_address(va_list list, t_buff *buffer)
 	else
 		len = 2;
 	if ((buffer->spaces > len) && !buffer->left)
-		handle_spaces_preci(len, buffer, 0, 0);
+		handle_s_and_p(len, buffer, 0, 0);
 	buffer->size += ft_putstr("0x");
 	if (buffer->precision)
-		handle_spaces_preci(len - 2, buffer, 0, 0);
+		handle_s_and_p(len - 2, buffer, 0, 0);
 	if (add || (!add && !buffer->preci))
 		buffer->size += ft_putstr(str);
-	handle_spaces_preci(len, buffer, 1, 0);
+	handle_s_and_p(len, buffer, 1, 0);
 }

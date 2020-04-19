@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:55:02 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/17 16:27:28 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 22:21:58 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,14 @@ void	ft_print_nb(va_list list, t_buff *buffer)
 	if ((buffer->left && buffer->zero) || (buffer->zero && buffer->precision))
 		buffer->zero = 0;
 	if (num < 0)
-	{
 		handle_neg(num, buffer);
-	}
 	else if (!num && buffer->preci && !buffer->precision && buffer->spaces)
-	{
-		handle_spaces_preci(0, buffer, buffer->left, 0);
-	}
+		handle_s_and_p(0, buffer, buffer->left, 0);
 	else
 	{
 		len = num_len(num);
-		handle_spaces_preci(len, buffer, 0, 0);
+		handle_s_and_p(len, buffer, 0, 0);
 		ft_putnbr(num, buffer);
-		handle_spaces_preci(len, buffer, 1, 0);
+		handle_s_and_p(len, buffer, 1, 0);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 17:08:40 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/19 12:05:10 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 22:58:06 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strrev(char *str)
 	return (str);
 }
 
-int		ft_ullintlen(unsigned long long nbr, char *base)
+int		ft_ullintlen(long long nbr, char *base)
 {
 	int lenbase;
 	int x;
