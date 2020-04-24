@@ -6,22 +6,11 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:55:34 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/19 15:41:40 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/24 17:16:46 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-void	init(t_buff *buffer)
-{
-	buffer->size = 0;
-	buffer->spaces = 0;
-	buffer->zero = 0;
-	buffer->left = 0;
-	buffer->preci = 0;
-	buffer->precision = 0;
-	buffer->tmp = 0;
-}
 
 int		find_index(char element)
 {
@@ -74,22 +63,28 @@ int		handle_options(va_list list, const char *str, t_buff *buffer)
 	return (i);
 }
 
+void	apply_conversion(int index, va_list list, t_buff *buffer)
+{
+	void	(*ptr_function[8]) (va_list, t_buff *);
+
+	ptr_function[0] = &ft_print_str;
+	ptr_function[1] = &ft_print_char;
+	ptr_function[2] = &ft_print_nb;
+	ptr_function[3] = &ft_print_nb;
+	ptr_function[4] = &ft_print_hex;
+	ptr_function[5] = &ft_print_hexa;
+	ptr_function[6] = &ft_print_address;
+	ptr_function[7] = &ft_print_unsigned;
+	(ptr_function[index])(list, buffer);
+}
+
 int		ft_print(va_list list, const char *str, t_buff *buffer)
 {
-	void	(*functions[8])(va_list, t_buff *);
 	int		tmp;
 	int		i;
 
 	tmp = -1;
 	i = 0;
-	functions[0] = ft_print_str;
-	functions[1] = ft_print_char;
-	functions[2] = ft_print_nb;
-	functions[3] = ft_print_nb;
-	functions[4] = ft_print_hex;
-	functions[5] = ft_print_hexa;
-	functions[6] = ft_print_address;
-	functions[7] = ft_print_unsigned;
 	while (str[i] && (tmp = handle_options(list, str + i, buffer)))
 	{
 		while (str[i] && tmp > 0)
@@ -102,7 +97,7 @@ int		ft_print(va_list list, const char *str, t_buff *buffer)
 		ft_print_char_b(str[i], buffer);
 	tmp = find_index(str[i]);
 	if (tmp != -1)
-		(*functions[tmp])(list, buffer);
+		apply_conversion(tmp, list, buffer);
 	else if (str[i + 1] != '\0')
 	{
 		ft_putchar(str[++i]);

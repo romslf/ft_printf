@@ -14,6 +14,7 @@ SRCS = src/main.c \
 	   src/printers/ft_print_nb.c \
 	   src/printers/ft_print_str.c \
 	   src/printers/ft_print_unsigned.c \
+	   src/utils/handle_buffer.c \
 	   src/utils/ft_ullintlen.c \
 	   src/utils/guard.c \
        src/utils/ft_numlen.c \

@@ -6,21 +6,11 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/04 13:20:21 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/20 14:55:32 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/24 17:15:44 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
-
-void	reset_buffer(t_buff *buffer)
-{
-	buffer->spaces = 0;
-	buffer->left = 0;
-	buffer->preci = 0;
-	buffer->precision = 0;
-	buffer->zero = 0;
-	buffer->tmp = 0;
-}
 
 void	handle_spaces(int len, t_buff *buffer, int left)
 {

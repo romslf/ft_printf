@@ -6,7 +6,7 @@
 /*   By: rolaforg <rolaforg@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 14:55:43 by rolaforg          #+#    #+#             */
-/*   Updated: 2020/04/20 14:55:46 by rolaforg         ###   ########lyon.fr   */
+/*   Updated: 2020/04/24 17:16:17 by rolaforg         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct	s_buff
 	int tmp;
 }				t_buff;
 
+void			init(t_buff *buffer);
+void			reset_buffer(t_buff *buffer);
 char			*ft_itoa_base(long long value, char *base);
 void			ft_print_char_b(char c, t_buff *buffer);
 int				guard(const char *str);
